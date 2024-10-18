@@ -19,9 +19,10 @@ import {
 } from "@chakra-ui/react";
 import { IoMdUnlock } from "react-icons/io";
 import { BsPerson } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate=useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,6 +36,7 @@ const Login = () => {
       .then((res) => {
         console.log("res", res.data.username);
         alert("sign in successfull!");
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.log("err", err.response.data.msg);

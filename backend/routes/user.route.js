@@ -1,18 +1,15 @@
 const express = require("express");
-// const bcrypt = require("bcrypt");
 
 const { UserModel } = require("../models/user.model");
 
 const userRouter = express.Router();
-
-// const jwt = require("jsonwebtoken");
 
 userRouter.post("/register", async (req, res) => {
   const payload = req.body;
 
   try {
     email = payload.email;
-    let useremail =await UserModel.findOne({ email });
+    let useremail = await UserModel.findOne({ email });
     if (useremail) {
       return res.status(401).send({ msg: "email already registered!" });
     }
@@ -39,14 +36,12 @@ userRouter.post("/login", async (req, res) => {
       return res.status(401).send({ msg2: "Wrong Password!" });
     }
 
-    res.send({ msg: "Login Successful", username:user });
+    res.send({ msg: "Login Successful", username: user });
     console.log(user);
   } catch (err) {
     console.error(err);
     res.status(500).send({ msg: "Internal Server Error" });
   }
 });
-
-
 
 module.exports = { userRouter };

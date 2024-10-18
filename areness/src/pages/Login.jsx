@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useToast } from '@chakra-ui/react'
 import axios from "axios";
 import {
   Container,
@@ -22,6 +23,7 @@ import { BsPerson } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const toast = useToast()
     const navigate=useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,13 +36,29 @@ const Login = () => {
     axios
       .post(`https://areness-assignment-1so8.onrender.com/login`, data)
       .then((res) => {
-        console.log("res", res.data.username);
-        alert("sign in successfull!");
+        console.log("res", res.data.username.username);
+        let x=res.data.username.username;
+        toast({
+            title: 'Login Successful.',
+            description: "Congratulations!,"+" "+ x,
+            position: 'top',
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
         navigate("/dashboard");
       })
       .catch((err) => {
         console.log("err", err.response.data.msg);
-        alert("Sign in failed!");
+        let err2=err.response.data.msg;
+        toast({
+            title: 'Login Failed.',
+            description: err2,
+            position: 'top',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
       });
   };
 

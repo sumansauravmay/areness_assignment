@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 import {
   Container,
   Flex,
@@ -21,10 +22,12 @@ import { MdOutlineEmail } from "react-icons/md";
 import { IoMdUnlock } from "react-icons/io";
 import { IoLockOpenOutline } from "react-icons/io5";
 import { BsPerson } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const toast = useToast();
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
@@ -41,26 +44,68 @@ const Signup = () => {
   };
 
   const handleSignup = () => {
-    if(!firstname || !lastname || !username || !email || !password || !repassword){
-alert("fill all the input!")
-    }else if(password!==repassword){
-        alert("check password and repassword")
-    }else if(password.length<8){
-alert("password length should be atleast 8 character")
-    }
-    else{
-        axios
+    if (
+      !firstname ||
+      !lastname ||
+      !username ||
+      !email ||
+      !password ||
+      !repassword
+    ) {
+      toast({
+        title: "Signup Failed.",
+        description: "Fill all the input!",
+        position: "top",
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else if (password !== repassword) {
+      toast({
+        title: "Signup Failed.",
+        description: "check password!",
+        position: "top",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else if (password.length < 8) {
+      toast({
+        title: "Signup Failed.",
+        description: "password length should be atleast 8 character",
+        position: "top",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
+      axios
         .post(`https://areness-assignment-1so8.onrender.com/register`, data)
         .then((res) => {
           console.log("res", res.data.user);
-          alert("Signu up successfully")
+          let x = res.data.user.username;
+          toast({
+            title: "Signup Successful.",
+            description: "Congratulations!," + " " + x,
+            position: "top",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+          navigate("/login");
         })
         .catch((err) => {
           console.log("err", err);
-          alert(err)
+          toast({
+            title: "Login Failed.",
+            description: "Congratulations!," + " " + err,
+            position: "top",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
         });
     }
-   
   };
 
   return (

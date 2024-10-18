@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import {
   Container,
   Flex,
@@ -16,14 +17,31 @@ import {
   InputLeftElement,
   Text,
 } from "@chakra-ui/react";
-import { FaUserPen } from "react-icons/fa6";
-import { MdOutlineEmail } from "react-icons/md";
 import { IoMdUnlock } from "react-icons/io";
-import { IoLockOpenOutline } from "react-icons/io5";
 import { BsPerson } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const data = {
+    username,
+    password,
+  };
+  const handleLogin = () => {
+    axios
+      .post(`http://localhost:4000/login`, data)
+      .then((res) => {
+        console.log("res", res.data.username);
+        alert("sign in successfull!");
+      })
+      .catch((err) => {
+        console.log("err", err.response.data.msg);
+        alert("Sign in failed!");
+      });
+  };
+
   return (
     <>
       <Container
@@ -59,6 +77,8 @@ const Login = () => {
                               type="text"
                               size="md"
                               placeholder="Enter Username Name"
+                              value={username}
+                              onChange={(e) => setUsername(e.target.value)}
                             />
                           </InputGroup>
                         </FormControl>
@@ -72,6 +92,8 @@ const Login = () => {
                               type="text"
                               size="md"
                               placeholder="Enter Password"
+                              value={password}
+                              onChange={(e) => setPassword(e.target.value)}
                             />
                           </InputGroup>
                         </FormControl>
@@ -86,6 +108,7 @@ const Login = () => {
                             bg="#FF7373"
                             color="white"
                             _hover={{}}
+                            onClick={handleLogin}
                           >
                             Login
                           </Button>

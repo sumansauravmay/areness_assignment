@@ -114,7 +114,7 @@ const Dashboard = () => {
                 <TaskCard
                   task={{
                     title: "Presentation on Final Product",
-                    description: "Prepare for the presentation",
+                    description: "Buy gifts on the way and pick up the cake from backery (6PM | Fresh Elements)...",
                     status: "In Progress",
                     priority: "Moderate",
                      time:"12/12/2023"

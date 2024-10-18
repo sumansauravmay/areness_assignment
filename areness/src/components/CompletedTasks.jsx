@@ -3,7 +3,7 @@ import TaskCard from "./TaskCard";
 
 function CompletedTasks() {
   return (
-    <VStack spacing={4} w="80%" boxShadow="lg">
+    <VStack spacing={4} w="100%" boxShadow="lg">
       <TaskCard
         task={{
           title: "Walk the dog",

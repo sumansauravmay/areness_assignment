@@ -23,9 +23,15 @@ function Sidebar() {
       p={5}
       w={{ base: "100%", md: "250px" }}
       color="white"
-      maxH="100vh"
+      maxH="200vh"
       spacing={8}
       align="stretch"
+      display={{
+        base: "none",
+        sm: "none",
+        md: "block",
+        lg: "block",
+      }}
     >
       <VStack spacing={4} align="center">
         <Avatar

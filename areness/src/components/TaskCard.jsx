@@ -1,14 +1,15 @@
-import {
-  Box,
-  Text,
-  HStack,
-  Flex,
-  Image,
-} from "@chakra-ui/react";
+import { Box, Text, HStack, Flex, Image } from "@chakra-ui/react";
 
 function TaskCard({ task }) {
   return (
-    <Box p={4} bg="white" shadow="md" borderRadius="md" w="full" h="150px">
+    <Box
+      p={4}
+      bg="white"
+      shadow="md"
+      borderRadius="md"
+      w="full"
+      h={{ lg: "190px", md: "200px", sm: "200px", base: "200px" }}
+    >
       <HStack justify="space-between">
         <Text fontWeight="bold">{task.title}</Text>
         <Image

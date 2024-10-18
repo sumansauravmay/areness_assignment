@@ -9,7 +9,7 @@ import { VscTasklist } from "react-icons/vsc";
 function TaskStatus() {
   return (
     <Box
-      w="80%"
+      w="100%"
       p={6}
       boxShadow="md"
       borderRadius="lg"

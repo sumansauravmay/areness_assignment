@@ -1,8 +1,3 @@
-
-
-
-
-
 import { HStack, CircularProgress, CircularProgressLabel, Box, Text, Flex } from "@chakra-ui/react";
 import { VscTasklist } from "react-icons/vsc";
 

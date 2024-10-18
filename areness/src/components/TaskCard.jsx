@@ -2,8 +2,6 @@ import {
   Box,
   Text,
   HStack,
-  Badge,
-  VStack,
   Flex,
   Image,
 } from "@chakra-ui/react";

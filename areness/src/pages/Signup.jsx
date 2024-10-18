@@ -50,7 +50,7 @@ alert("password length should be atleast 8 character")
     }
     else{
         axios
-        .post(`http://localhost:4000/register`, data)
+        .post(`https://areness-assignment-1so8.onrender.com/register`, data)
         .then((res) => {
           console.log("res", res.data.user);
           alert("Signu up successfully")

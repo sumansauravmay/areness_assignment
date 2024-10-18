@@ -32,7 +32,7 @@ const Login = () => {
   };
   const handleLogin = () => {
     axios
-      .post(`http://localhost:4000/login`, data)
+      .post(`https://areness-assignment-1so8.onrender.com/login`, data)
       .then((res) => {
         console.log("res", res.data.username);
         alert("sign in successfull!");

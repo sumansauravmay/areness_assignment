@@ -26,11 +26,11 @@ function TaskCard({ task }) {
       <Flex justifyContent="space-between">
         <Text fontSize="sm" color="black.400">
           Priority:
-          <label style={{ color: "blue" }}>{task.priority}</label>
+          <label style={{ color: "blue" }}> {task.priority}</label>
         </Text>
         <Text fontSize="sm" color="black.400">
           Status:
-          <label style={{ color: "red" }}>{task.status}</label>
+          <label style={{ color: "red" }}> {task.status}</label>
         </Text>
         <Text fontSize="sm" color="gray.500">
           Created On: {task.time}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Flex,
@@ -14,18 +14,55 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { FaUserPen } from "react-icons/fa6";
-import {
-  MdOutlineEmail,
-} from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
 import { IoMdUnlock } from "react-icons/io";
 import { IoLockOpenOutline } from "react-icons/io5";
-import {BsPerson } from "react-icons/bs";
+import { BsPerson } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repassword, setRepassword] = useState("");
+  let data = {
+    firstname,
+    lastname,
+    username,
+    email,
+    password,
+    repassword,
+  };
+
+  const handleSignup = () => {
+    if(!firstname || !lastname || !username || !email || !password || !repassword){
+alert("fill all the input!")
+    }else if(password!==repassword){
+        alert("check password and repassword")
+    }else if(password.length<8){
+alert("password length should be atleast 8 character")
+    }
+    else{
+        axios
+        .post(`http://localhost:4000/register`, data)
+        .then((res) => {
+          console.log("res", res.data.user);
+          alert("Signu up successfully")
+        })
+        .catch((err) => {
+          console.log("err", err);
+          alert(err)
+        });
+    }
+   
+  };
+
   return (
     <>
       <Container
@@ -82,6 +119,8 @@ const Signup = () => {
                               type="text"
                               size="md"
                               placeholder="Enter First Name"
+                              value={firstname}
+                              onChange={(e) => setFirstname(e.target.value)}
                             />
                           </InputGroup>
                         </FormControl>
@@ -95,6 +134,8 @@ const Signup = () => {
                               type="text"
                               size="md"
                               placeholder="Enter Last Name"
+                              value={lastname}
+                              onChange={(e) => setLastname(e.target.value)}
                             />
                           </InputGroup>
                         </FormControl>
@@ -108,6 +149,8 @@ const Signup = () => {
                               type="text"
                               size="md"
                               placeholder="Enter Username Name"
+                              value={username}
+                              onChange={(e) => setUsername(e.target.value)}
                             />
                           </InputGroup>
                         </FormControl>
@@ -121,6 +164,8 @@ const Signup = () => {
                               type="text"
                               size="md"
                               placeholder="Enter Email"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
                             />
                           </InputGroup>
                         </FormControl>
@@ -134,6 +179,8 @@ const Signup = () => {
                               type="text"
                               size="md"
                               placeholder="Enter Password"
+                              value={password}
+                              onChange={(e) => setPassword(e.target.value)}
                             />
                           </InputGroup>
                         </FormControl>
@@ -147,12 +194,14 @@ const Signup = () => {
                               type="text"
                               size="md"
                               placeholder="Confirm Password"
+                              value={repassword}
+                              onChange={(e) => setRepassword(e.target.value)}
                             />
                           </InputGroup>
                         </FormControl>
 
                         <FormControl>
-                          <Checkbox >I agree to all terms</Checkbox>
+                          <Checkbox>I agree to all terms</Checkbox>
                         </FormControl>
 
                         <FormControl id="name" float="right">
@@ -161,22 +210,18 @@ const Signup = () => {
                             bg="#FF7373"
                             color="white"
                             _hover={{}}
+                            onClick={handleSignup}
                           >
                             Signup
                           </Button>
 
                           <Flex>
-                          <Text>Already have account? </Text>
-                          <Link to='/login'>
-                             <Text color={'blue'}>Login</Text>
+                            <Text>Already have account? </Text>
+                            <Link to="/login">
+                              <Text color={"blue"}>Login</Text>
                             </Link>
                           </Flex>
-                         
                         </FormControl>
-
-
-
-
                       </VStack>
                     </Box>
                   </Box>
